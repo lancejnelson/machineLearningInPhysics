@@ -1,0 +1,156 @@
+\chapter{Introduction to Probability}
+ \label{chap:probability} \index{Probability}
+ \index{Kernels}
+
+ \labsection{Simple Probability}
+For most people, the idea of simple probability is pretty intuitive.
+The probability of rolling a 5 on a 6-sided die is ${ 1\over 6}$ and
+the probability of drawing the queen of hearts in a 52-card deck is
+${1\over 52}$.  Generalizing this idea yields the equation:
+
+\begin{equation}\label{eq:simpleProb}
+  P(\text{event~ A}) = {\text{No.~of~ways~A~can~happen}\over \text{Total~no.~of~things~that~could~happen}}
+\end{equation}
+
+
+\labsection{Probability of multiple events}
+
+Things get a little harder when you consider multiple events because
+you have to consider whether the outcome of one event will affect the
+outcome of the next.  For example, suppose you roll a $6$-sided
+die twice and you want to know the probability that both rolls come up $5$.
+Having a $5$ come up on the first roll doesn't affect the probability
+that a $5$ comes up on the second.  These two events are independent
+of one another.  The outcome of one event does not affect the outcome
+of the other.
+
+In contrast, consider randomly selecting marbles out of a bag which initially
+contains $3$ red marbles and $8$ green marbles.   If you reach into the
+bag and grab two marbles, what is the probability that they will both
+be red?  Notice that selecting a red marble on my first reach into the bag
+modifies the number or red marbles available for selection on my
+second reach into the bag. Hence the two probabilities are dependent
+on each other.  This is an example of dependent events.
+
+\subsection*{Intersection of two events (event A \textbf{and} event B)}
+\marginfig[-1in]{Figures/twoDieRollsII}{\label{twoDieRolls}All 36
+  outcomes from rolling two fair dice.  Out of 36 possible outcomes,
+  only one yields a $5$ on both rolls.  Hence the probability of
+  rolling two $5$'s is ${1\over 36}$.}
+
+We'll start with the case where two events, $A$ and $B$, both
+occur. (Also called the intersection of two events. See figure \ref{fig:VennDiagram})
+The math for this sort of situation is:
+
+\begin{equation}
+  P(A \cap B) = P(A)  \times P(B)\nonumber
+\end{equation}
+
+but let's see some examples so it makes more sense.
+
+
+\subsubsection*{Independent Events}
+Consider rolling a fair $6$-sided dice.  What is the probability that
+$5$ comes up on the first two rolls?  Your intuition is probably telling
+you that rolling two $5$'s is less likely than rolling just one, so
+you expect the probability to be less than ${1\over 6}$.  In figure
+\ref{twoDieRolls} you will see all 36 possible outcomes when rolling a
+fair dice two times.  Of those 36 possible outcomes how many of
+occurrences of two $5$'s being rolled were there?  Just one.  Hence,
+the probability is ${1\over 36}$.  You may have noticed that
+${1\over 36} = {1\over 6} \times {1\over 6}$.  In other words, the
+probability of event A happening \textbf{and} event B happening is
+just the product of the two individual probabilities:
+
+\begin{equation}\label{eq:andprobability}
+  P(A\text{ and } B) = P(A) \times P(B)
+\end{equation}
+
+
+
+sometimes $P(A\text{ and } B)$ is written using the symbol for
+intersection ($\cap$):
+\begin{equation}\label{eq:andprobability}
+  P(A \cap B) = P(A) \times P(B)
+\end{equation}
+
+
+
+
+\subsubsection{Dependent Events}
+When the outcome of one event is affected by the outcome of a previous
+event, we say they events are dependent.  For example, consider a bag
+containing $3$ red marbles and $8$ green marbles.  If I reach into the
+bag and select two marbles, what is the probability that they are both
+red.  The probability that my first selection is red is:
+
+\begin{equation}
+P(A) = {3\over 11}  \nonumber
+\end{equation}
+
+\marginfig[-1in]{Figures/VennDiagram}{\label{fig:VennDiagram}If the
+  blue circle represents the probability of A occuring and the red
+  circle represents the probability of B occuring, then the overlap of
+these two circles is the probability of both events occuring. By
+sliding one cirle left or right we can adjust the size of the overlap
+(aka $P(A|B)$)}
+
+because $3$ out of theh $11$ choices are red.  What about the second
+selection.  After the first selection, I am left with $10$ marbles,
+$2$ of them being red.  Hence, the probability that I draw a red
+marble on my second selection is:
+
+\begin{equation}
+ P(B) = {2\over 10}\nonumber
+\end{equation}
+
+The probability that event A (first selection is a red marble)
+\textbf{and} event B is
+
+\begin{align}
+  P(A \cap B) &= P(A) \times P(B)\nonumber\\
+              &= {3\over 11} {2\over 10}\nonumber\\
+              &= {6 \over 110}\nonumber\\
+              &= 0.055 \nonumber\\
+              &= 5.5\%\nonumber
+\end{align}
+
+
+
+In general, the probability of two events occuring is given by:
+
+\begin{equation}\label{eq:andprobabilityII}
+  P(A \cap B) = P(A) \times P(B|A)
+\end{equation}
+
+where $P(A|B)$ is called ``conditional probability'' and means the
+probability of $B$ happening \textbf{given that} $A$ already happened.
+It's important to recognize that equation \eqref{eq:andprobability} is
+the most general equation for two events and that equation  This equation reduces to equation
+\eqref{eq:andprobability} when the events are independent.
+
+We can do a little algebra on equation \eqref{eq:andprobabilityII} to
+get:
+
+\begin{equation}
+  P(B|A) = {P(A \cap B)\over P(A)}
+\end{equation}
+
+Furthermore, if $A$ and $B$ are independent events, then $P(A\cap B) =
+P(B \cap A) = P(B) \times P(A|B)$.  Hence, the above equation becomes:
+
+\begin{align}
+  P(B|A) &= {P(A \cap B)\over P(A)}\\
+         &= \boxed{{P(A|B) P(B) \over P(A)}}
+\end{align}
+
+
+\marginfig[-1in]{Figures/twoDieRollsIII}{\label{twoDieRollsIII}All 36
+  outcomes from rolling two fair dice.  <first roll> - <second roll>}
+
+This is known as Bayes' Theorem or Bayes' Rule and is of profound
+importance going forward.
+
+
+
+\subsection*{Union of two events (event A \textbf{or} event B)}

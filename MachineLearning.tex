@@ -1,0 +1,98 @@
+\documentclass[twoside,11pt,ShortChapTitles]{BYUTextbook}
+
+\usepackage{soul}
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
+\newcounter{dummy}
+\usepackage[style=verbose,backend=bibtex]{biblatex}  % For footnote citations
+\addbibresource{refs.bib}
+\usepackage[super]{nth}
+\newcommand{\labsection}[1]{\refstepcounter{dummy}\addcontentsline{toc}{section}{#1}\section*{#1}}
+\usepackage{siunitx}
+\sisetup{round-mode = figures,
+  round-precision = 3, scientific-notation=true}
+\newif\ifsolutions
+\solutionsfalse
+
+\begin{document}
+
+\frontmatter
+
+ \thispagestyle{empty}
+ \begin{adjustwidth}{}{-1.5in}
+ \centering
+ {\huge Machine Learning for Physicists}
+ %\vskip1.5truein
+
+    \includegraphics[scale=0.6]{Figures/circMembrane}
+
+%\vskip1truein
+Lance J.\ Nelson
+
+\vskip.4truein
+Department of Physics
+\end{adjustwidth}
+
+\cleardoublepage
+\thispagestyle{empty}
+
+ \begin{adjustwidth}{}{-1.5in}
+ \centering
+ \vspace*{1in}
+ \large
+ {\huge Machine Learning for Physicists}
+ \vskip.4truein
+
+ Lance J.\ Nelson
+ \bigskip
+
+ Department of Physics
+
+ \bigskip
+ Brigham Young University--Idaho
+
+ \vfill
+
+
+ {\footnotesize $\copyright$ 2020 Lance J.\ Nelson
+               Brigham Young University--Idaho}
+
+ \vskip.5truein
+ {\footnotesize \emph{Last Revised: \today}}
+ \normalsize
+
+ \end{adjustwidth}
+
+\cleardoublepage
+\phantomsection
+\input{chapters/preface}
+
+
+ \cleardoublepage 
+\phantomsection
+ \addcontentsline{toc}{chapter}{Table of Contents}
+\tableofcontents
+
+\mainmatter
+\renewcommand{\chaptermark}[1]{\markboth{Computational Physics 385}{\chaptername \ \thechapter \ \ #1}}
+\part{Simple Probability}
+\input{chapters/probability}
+\part{Bayesian Statistics}
+%\input{chapters/gaussianProcess}
+\part{Regression}
+\part{Optimization Algorithms}
+
+
+ Commented out by Michael Ware.  Code below inserts index
+ \begin{theindex}
+ \input{MachineLearning.idx}
+ \end{theindex}
+
+%\bibliographystyle{ieeetr}
+%\bibliography{refs}
+
+ \cleardoublepage \phantomsection
+ \addcontentsline{toc}{chapter}{Index}
+ \printindex
+\printbibliography
+\end{document}
+
