@@ -2,16 +2,25 @@
  \label{chap:probability} \index{Probability}
  \index{Kernels}
 
- \labsection{Simple Probability}
-For most people, the idea of simple probability is pretty intuitive.
-The probability of rolling a 5 on a 6-sided die is ${ 1\over 6}$ and
-the probability of drawing the queen of hearts in a 52-card deck is
-${1\over 52}$.  Generalizing this idea yields the equation:
+ \labsection{Simple Probability} For most people, the idea of simple
+ probability is pretty intuitive.  The probability of rolling a 5 on a
+ 6-sided die is ${ 1\over 6}$ because of the $6$ possible outcomes,
+ only one of them produces a $5$.  The probability of drawing a red
+ card in a standard, 52-card deck is ${13\over 52}$ because of the 52
+ total cards, $13$ of them are red.  Generalizing this idea yields the
+ equation:
 
 \begin{equation}\label{eq:simpleProb}
   P(\text{event~ A}) = {\text{No.~of~ways~A~can~happen}\over \text{Total~no.~of~things~that~could~happen}}
 \end{equation}
 
+
+This equation is the most general version for calculating probability
+and is a good one to fall back on when you get stuck.  However,
+sometimes it's hard, or impossible, to count the number of possible
+outcomes. (or maybe even the number of ways an event can
+happen). Hence, what follows are some tricks and rules that you can
+use to calculate probability when brute-force counting is intractable.
 
 \labsection{Probability of multiple events}
 
@@ -25,14 +34,14 @@ of one another.  The outcome of one event does not affect the outcome
 of the other.
 
 In contrast, consider randomly selecting marbles out of a bag which initially
-contains $3$ red marbles and $8$ green marbles.   If you reach into the
+contains $3$ red marbles and $8$ green marbles.  If you reach into the
 bag and grab two marbles, what is the probability that they will both
-be red?  Notice that selecting a red marble on my first reach into the bag
-modifies the number or red marbles available for selection on my
+be red?  Notice that selecting a red marble on the first reach into the bag
+modifies the number or red marbles available for selection on the
 second reach into the bag. Hence the two probabilities are dependent
 on each other.  This is an example of dependent events.
 
-\subsection*{Intersection of two events (event A \textbf{and} event B)}
+\subsection*{Intersection of two events (event A \underline{and} event B)}
 \marginfig[-1in]{Figures/twoDieRollsII}{\label{twoDieRolls}All 36
   outcomes from rolling two fair dice.  Out of 36 possible outcomes,
   only one yields a $5$ on both rolls.  Hence the probability of
@@ -62,8 +71,8 @@ ${1\over 36} = {1\over 6} \times {1\over 6}$.  In other words, the
 probability of event A happening \textbf{and} event B happening is
 just the product of the two individual probabilities:
 
-\begin{equation}\label{eq:andprobability}
-  P(A\text{ and } B) = P(A) \times P(B)
+\begin{equation}
+  P(A\text{ and } B) = P(A) \times P(B)\nonumber
 \end{equation}
 
 
@@ -95,8 +104,8 @@ these two circles is the probability of both events occuring. By
 sliding one cirle left or right we can adjust the size of the overlap
 (aka $P(A|B)$)}
 
-because $3$ out of theh $11$ choices are red.  What about the second
-selection.  After the first selection, I am left with $10$ marbles,
+because $3$ out of the $11$ choices are red.  What about the second
+selection?  After the first selection, I am left with $10$ marbles,
 $2$ of them being red.  Hence, the probability that I draw a red
 marble on my second selection is:
 
@@ -104,20 +113,35 @@ marble on my second selection is:
  P(B) = {2\over 10}\nonumber
 \end{equation}
 
-The probability that event A (first selection is a red marble)
-\textbf{and} event B is
+The probability that my first selection will be a red marble (event A)
+\textbf{and} my second selection will also be a red marble (event B)
+is then
 
 \begin{align}
-  P(A \cap B) &= P(A) \times P(B)\nonumber\\
+  P(A \cap B) &= P(A) \times P(B|A)\nonumber\\
               &= {3\over 11} {2\over 10}\nonumber\\
               &= {6 \over 110}\nonumber\\
               &= 0.055 \nonumber\\
               &= 5.5\%\nonumber
 \end{align}
 
+where $P(A|B)$ is called ``conditional probability'' and means the
+probability of $B$ happening \textbf{given that} $A$ already happened.
 
+Notice that this is really the same thing we did for independent
+events (namely, multiply the two individual probabilities together)
+but we just had to be explicit state that when calculating the
+probability of event B we had to assume the event A had already happened.
 
-In general, the probability of two events occuring is given by:
+If we want the probility of more than two events happening, we can
+continue to multiply conditional probabilities for each event, making
+sure to condition it on a positive result for all previous events.
+
+Whether the events are dependent or independent doesn't change the
+general equation for multiple events, which is given by equation
+\eqref{eq:andprobability}.  However, to account for the possibility
+that event B's probability depends on event A, we'll write equation
+\eqref{eq:andprobability} as
 
 \begin{equation}\label{eq:andprobabilityII}
   P(A \cap B) = P(A) \times P(B|A)
@@ -125,9 +149,6 @@ In general, the probability of two events occuring is given by:
 
 where $P(A|B)$ is called ``conditional probability'' and means the
 probability of $B$ happening \textbf{given that} $A$ already happened.
-It's important to recognize that equation \eqref{eq:andprobability} is
-the most general equation for two events and that equation  This equation reduces to equation
-\eqref{eq:andprobability} when the events are independent.
 
 We can do a little algebra on equation \eqref{eq:andprobabilityII} to
 get:
@@ -145,7 +166,7 @@ P(B \cap A) = P(B) \times P(A|B)$.  Hence, the above equation becomes:
 \end{align}
 
 
-\marginfig[-1in]{Figures/twoDieRollsIII}{\label{twoDieRollsIII}All 36
+\marginfig[-1in]{Figures/twoDieRollsIII}{\label{fig:twoDieRollsIII}All 36
   outcomes from rolling two fair dice.  <first roll> - <second roll>}
 
 This is known as Bayes' Theorem or Bayes' Rule and is of profound
@@ -153,4 +174,102 @@ importance going forward.
 
 
 
-\subsection*{Union of two events (event A \textbf{or} event B)}
+\subsection*{Union of two events (event A \underline{or} event B)}
+Things change a little if you are asking about the probability that
+either event A happens, or event B happens.  Let's handle independent
+events first, then we'll do dependent events.
+
+\subsubsection*{Independent Events}
+Let's take the dice-rolling example that we've been working with and
+ask ourselves what the probability is that either the first roll
+is a $5$ \underline{or} the second roll is a $5$.  Figure
+\ref{fig:twoDieRollsIII} will help us answer the question and then
+we'll try to generalize the result.  The figure shows all possible
+results when rolling two fair die.  Highlighted are the cases where
+one of the rolls was a 5.  As you can see, there are $11$ ways that
+one of the rolls can be a $5$.  Hence, the probability is ${11\over
+  36}$.  That's a great way to do a really simple problem, but what if
+ I roll the dice 10 times and ask what the probability is that one of
+ them is a 5.  Not so easy anymore right.  Let's try to generalize
+ this result.  The general equation for \underline{or} events is:
+
+ \begin{equation}
+   P(\text{A or B}) = P(A) + P(B) - P(A,B)\label{eq:orevents}
+\end{equation}
+ 
+where $P(A)$ is the probability that event A occurs, $P(B)$ is the
+probability that event B occurs, and $P(A,B)$ is the probability that
+A and B both occur. Let's see what this works out to for this problem:
+
+
+ \begin{align}
+   P(\text{A or B}) &= {1\over 6} + {1\over 6} - {1\over 36}\\
+                    &= {6\over 36} + {6\over 36} - {1\over 36}\\
+                    &= {11\over 36}\\
+ \end{align}
+
+ which agrees with our result from the table.
+
+ \subsubsection*{Dependent Events}
+
+ \begin{figure}
+   \includegraphics[scale = 0.3]{Figures/treeDiagram.png}
+   \caption{Testing \label{fig:tree}}
+   \end{figure}
+
+ If event A and B are dependent, then we need to modify equation
+ \eqref{eq:orevents} like this:
+
+  \begin{equation}
+   P(\text{A or B}) = P(A) + P(B\cap  \text{not A}) - P(A \cap B)\label{eq:oreventsdependent}
+ \end{equation}
+
+ A tree diagram (see figure \ref{fig:tree}) will help to understand
+ how this works.  On the first selection, the probability of drawing a
+ green marble is $P(A) =  {3\over 5}$.  $P(B| \text{not A})$ is the
+ probability that a green marble is draw on the second selection
+ \underline{assuming that} a green marble was not drawn on the first.
+ From the tree diagram we can see that this is equal to:  We can use
+ equation \eqref{eq:andprobabilityII} to find $P(B\cap \text{not A})$:
+
+ \begin{align}
+   P(B\cap \text{not A}) &= P(B| \text{not A}) \times P(A)\nonumber \\
+                         &= {3\over 4} {2\over 5}\nonumber
+ \end{align}
+
+ \begin{equation}
+   P(A \cap B) = {3\over 5}{1\over 2}\nonumber
+\end{equation}
+
+Putting it all together we get:
+
+  \begin{align}
+   P(\text{A or B}) &= P(A) + P(B\cap  \text{not A}) - P(A \cap
+                      B)\\\nonumber
+                      &= {3\over 5} + {3\over 4}{2\over 5} - {3\over 5}{1\over 2}\\\nonumber
+                      &= {3\over 5} + {6\over 20} - {3\over 10}\\\nonumber
+                      &= {12\over 20} + {6\over 20} - {6\over 20}\\\nonumber
+                      &= {12\over 20}\\\nonumber
+                      &= {3\over 5}\nonumber
+ \end{align}
+
+ Another way to see this result is to enumerate all possible ways to
+ draw these marbles from the basket: (There are only ten possible ways
+ to do this.)\\
+
+ 
+\noindent {r, r, g, g, g}\\
+ \textcolor{red}{r, g, r, g, g}\\
+\textcolor{red} {r, g, g, r, g}\\
+ \textcolor{red}{r, g, g, g, r}\\
+ \textcolor{red}{g, r, r, g, g}\\
+ \textcolor{red}{g, r, g, r, g}\\
+ \textcolor{red}{g, r, g, g, r}\\
+ {g, g, r, r, g}\\
+ {g, g, r, g, r}\\
+ {g, g, g, r, r}\\
+
+
+ And notice that there are 6 ways where one (and only one) of the
+ first two selections is green.  Hence, the probability is ${6\over
+   10} = {3\over 5}$
